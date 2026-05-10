@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Louiz Mac | macOS Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --primary: #3b82f6;
+            --hover-color: #2563eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --primary: #60a5fa;
+            --hover-color: #3b82f6;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-up { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo { font-size: 1.2rem; font-weight: 600; }
+
+        .theme-toggle {
+            background: none; border: none; color: var(--text-color);
+            font-size: 1.3rem; cursor: pointer; transition: var(--transition);
+        }
+
+        header {
+            padding: 12vh 5% 8vh 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background-color: var(--primary);
+            color: #fff !important;
+            padding: 0.9rem 1.8rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+        }
+
+        section {
+            padding: 4rem 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        [data-theme="dark"] .card { border-color: rgba(255,255,255,0.05); }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .card i.main-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .card h3 { font-size: 1.5rem; margin-bottom: 0.8rem; }
+        .card p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .card-link {
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { text-align: center; }
+            header p { margin-left: auto; margin-right: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="animate-up">
+        <div class="logo">Louiz Mac.</div>
+        <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <header class="animate-up delay-1">
+        <h1>Hi, I'm Louiz.</h1>
+        <p>I specialize in developing high-quality source code for macOS applications, focusing on native performance and elegant architecture.</p>
+        <a href="https://github.com/louizmac" target="_blank" class="btn">
+            <i class="fab fa-github"></i> View GitHub Profile
+        </a>
+    </header>
+
+    <section class="animate-up delay-2">
+        <h2 style="margin-bottom: 2.5rem;">Featured Projects</h2>
+        <div class="grid" id="project-container">
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Louiz Mac.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        async function loadProjects() {
+            const container = document.getElementById('project-container');
+            try {
+                const response = await fetch('projects.json');
+                const projects = await response.json();
+                
+                container.innerHTML = projects.map(p => `
+                    <a href="${p.link}" target="_blank" class="card">
+                        <i class="${p.icon} main-icon"></i>
+                        <h3>${p.title}</h3>
+                        <p>${p.description}</p>
+                        <div class="card-link">
+                            View Source <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = "<p>Error loading projects. Check console.</p>";
+                console.error(err);
+            }
+        }
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            setTheme(isDark ? 'light' : 'dark');
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+        loadProjects();
+    </script>
+</body>
+</html>
