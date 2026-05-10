@@ -4,5 +4,11 @@
     "description": "A specialized macOS application focused on high-performance automation and clean source code architecture. Designed to streamline native workflows.",
     "link": "https://github.com/louizmac/action",
     "icon": "fas fa-terminal"
-  }
+  },
+  {
+  "title": "Blitz",
+  "description": "A minimalist, SwiftUI-based quick-note app for macOS. Instantly capture thoughts in a floating glassmorphic window using a global hotkey.",
+  "link": "https://github.com/louizmac/blitz",
+  "icon": "fas fa-bolt"
+}
 ]
