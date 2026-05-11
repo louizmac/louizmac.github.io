@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Louiz Mac | macOS Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #f9fafb;
-            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
             --card-bg: #ffffff;
             --primary: #3b82f6;
-            --hover-color: #2563eb;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --primary-hover: #2563eb;
+            --accent: #8b5cf6;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
             --bg-color: #0f172a;
-            --text-color: #f1f5f9;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
             --card-bg: #1e293b;
             --primary: #60a5fa;
-            --hover-color: #3b82f6;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --primary-hover: #3b82f6;
+            --accent: #a78bfa;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,8 +50,9 @@
         }
 
         .animate-up { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
 
         nav {
             display: flex;
@@ -56,29 +63,39 @@
             margin: 0 auto;
         }
 
-        .logo { font-size: 1.2rem; font-weight: 600; }
+        .logo { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; }
 
         .theme-toggle {
-            background: none; border: none; color: var(--text-color);
-            font-size: 1.3rem; cursor: pointer; transition: var(--transition);
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; cursor: pointer; transition: var(--transition);
         }
+        .theme-toggle:hover { transform: rotate(15deg); }
 
         header {
-            padding: 12vh 5% 8vh 5%;
+            padding: 8vh 5% 5vh 5%;
             max-width: 1100px;
             margin: 0 auto;
         }
 
         header h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
             letter-spacing: -2px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
             font-size: 1.25rem;
-            opacity: 0.8;
+            color: var(--text-muted);
             margin-bottom: 2.5rem;
             max-width: 650px;
         }
@@ -86,6 +103,7 @@
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.6rem;
             background-color: var(--primary);
             color: #fff !important;
@@ -94,17 +112,113 @@
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
+            background-color: var(--primary-hover);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
         }
 
-        section {
-            padding: 4rem 5%;
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-color) !important;
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--card-bg);
+            border-color: var(--primary);
+            box-shadow: none;
+        }
+
+        .hero-project {
+            padding: 0 5% 4rem 5%;
             max-width: 1100px;
             margin: 0 auto;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .main-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .main-card h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .version-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        [data-theme="dark"] .version-badge { background: rgba(96, 165, 250, 0.15); }
+
+        .main-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .main-card-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        section {
+            padding: 2rem 5% 4rem 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .grid {
@@ -121,13 +235,13 @@
             transition: var(--transition);
             text-decoration: none;
             color: inherit;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
         }
 
-        [data-theme="dark"] .card { border-color: rgba(255,255,255,0.05); }
-
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--primary);
         }
 
@@ -135,11 +249,16 @@
             font-size: 2rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
-            display: block;
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 1rem;
+            border-radius: 14px;
         }
 
-        .card h3 { font-size: 1.5rem; margin-bottom: 0.8rem; }
-        .card p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 2rem; }
+        [data-theme="dark"] .card i.main-icon { background: rgba(96, 165, 250, 0.15); }
+
+        .card h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; flex-grow: 1; }
 
         .card-link {
             font-weight: 600;
@@ -147,18 +266,20 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-top: auto;
         }
 
         footer {
             text-align: center;
             padding: 4rem 0;
-            opacity: 0.5;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
-            header { text-align: center; }
-            header p { margin-left: auto; margin-right: auto; }
+            header, .main-card-header { text-align: center; justify-content: center; }
+            .project-title-group { flex-direction: column; }
+            .main-card-actions { justify-content: center; }
         }
     </style>
 </head>
@@ -166,7 +287,7 @@
 
     <nav class="animate-up">
         <div class="logo">Louiz Mac.</div>
-        <button class="theme-toggle" id="theme-toggle">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
             <i class="fas fa-moon"></i>
         </button>
     </nav>
@@ -174,23 +295,70 @@
     <header class="animate-up delay-1">
         <h1>Hi, I'm Louiz.</h1>
         <p>I specialize in developing high-quality source code for macOS applications, focusing on native performance and elegant architecture.</p>
-        <a href="https://github.com/louizmac" target="_blank" class="btn">
+        <a href="https://github.com/louizmac" target="_blank" class="btn btn-outline">
             <i class="fab fa-github"></i> View GitHub Profile
         </a>
     </header>
 
-    <section class="animate-up delay-2">
-        <h2 style="margin-bottom: 2.5rem;">Featured Projects</h2>
-        <div class="grid" id="project-container">
+    <div class="hero-project animate-up delay-2">
+        <div class="main-card">
+            <div class="main-card-header">
+                <div class="project-title-group">
+                    <i class="fas fa-terminal" style="font-size: 2rem; color: var(--primary);"></i>
+                    <h2>Action</h2>
+                    <span class="version-badge" id="action-version">
+                        <i class="fas fa-circle-notch fa-spin"></i> Fetching...
+                    </span>
+                </div>
             </div>
+            
+            <p><strong>Action</strong> is my main project: A specialized macOS application focused on high-performance automation and clean source code architecture. Designed to seamlessly and efficiently optimize native workflows.</p>
+            
+            <div class="main-card-actions">
+                <a href="https://github.com/louizmac/action/releases" target="_blank" id="action-download" class="btn">
+                    <i class="fas fa-download"></i> Download Latest Release
+                </a>
+                <a href="https://github.com/louizmac/action" target="_blank" class="btn btn-outline">
+                    <i class="fas fa-code"></i> Source Code
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="animate-up delay-3">
+        <h2 class="section-title">Other Projects</h2>
+        <div class="grid" id="project-container">
+        </div>
     </section>
 
     <footer>
-        <p>&copy; <span id="year"></span> Louiz Mac.</p>
+        <p>&copy; <span id="year"></span> Louiz Mac. Crafted with passion.</p>
     </footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        async function fetchActionRelease() {
+            try {
+                const response = await fetch('https://api.github.com/repos/louizmac/action/releases/latest');
+                const data = await response.json();
+                
+                if (response.ok && data.tag_name) {
+                    document.getElementById('action-version').innerHTML = `<i class="fas fa-tag"></i> ${data.tag_name}`;
+                    
+                    if (data.assets && data.assets.length > 0) {
+                        document.getElementById('action-download').href = data.assets[0].browser_download_url;
+                    } else {
+                        document.getElementById('action-download').href = data.html_url;
+                    }
+                } else {
+                    document.getElementById('action-version').innerHTML = `In Development`;
+                }
+            } catch (err) {
+                console.error("Failed to fetch GitHub release:", err);
+                document.getElementById('action-version').innerHTML = `v1.0`;
+            }
+        }
 
         async function loadProjects() {
             const container = document.getElementById('project-container');
@@ -198,7 +366,14 @@
                 const response = await fetch('projects.json');
                 const projects = await response.json();
                 
-                container.innerHTML = projects.map(p => `
+                const filteredProjects = projects.filter(p => p.title.toLowerCase() !== 'action');
+                
+                if(filteredProjects.length === 0) {
+                    container.innerHTML = "<p style='color: var(--text-muted);'>No other projects at the moment.</p>";
+                    return;
+                }
+
+                container.innerHTML = filteredProjects.map(p => `
                     <a href="${p.link}" target="_blank" class="card">
                         <i class="${p.icon} main-icon"></i>
                         <h3>${p.title}</h3>
@@ -231,6 +406,8 @@
         const savedTheme = localStorage.getItem('theme') || 
             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         setTheme(savedTheme);
+        
+        fetchActionRelease();
         loadProjects();
     </script>
 </body>
